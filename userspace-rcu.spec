@@ -1,12 +1,12 @@
-Name:           userspace-rcu
+Name:           userspace-rcu0.7
 Version:        0.7.16
-Release:        1%{?dist}
+Release:        2%{?dist}
 Summary:        RCU (read-copy-update) implementation in user space
 
 Group:          System Environment/Libraries
 License:        LGPLv2+
 URL:            http://lttng.org/urcu/
-Source0:        http://lttng.org/files/urcu/%{name}-%{version}.tar.bz2
+Source0:        http://lttng.org/files/urcu/userspace-rcu-%{version}.tar.bz2
 BuildRequires:  pkgconfig 
 # Upstream do not yet support mips
 ExcludeArch:    mips
@@ -29,7 +29,7 @@ developing applications that use %{name}.
 
 
 %prep
-%setup -q
+%setup -q -n userspace-rcu-%{version}
 
 
 %build
@@ -57,19 +57,22 @@ rm -vf $RPM_BUILD_ROOT%{_libdir}/*.la
 
 %files
 %doc LICENSE gpl-2.0.txt lgpl-relicensing.txt lgpl-2.1.txt
-%{_docdir}/%{name}/README
-%{_docdir}/%{name}/ChangeLog
+%{_docdir}/userspace-rcu/README
+%{_docdir}/userspace-rcu/ChangeLog
 %{_libdir}/*.so.*
 
 %files devel
 %{_includedir}/*
 %{_libdir}/*.so
 %{_libdir}/pkgconfig/liburcu*.pc
-%{_docdir}/%{name}/README
-%{_docdir}/%{name}/*.txt
+%{_docdir}/userspace-rcu/README
+%{_docdir}/userspace-rcu/*.txt
 
 
 %changelog
+* Wed Apr 19 2023 Pavel Malyshev <p.malishev@gmail.com> 0.7.16-2
+- Renamed package so that it can coexist with 0.10 code line
+
 * Tue Dec  8 2015 Peter Robinson <pbrobinson@fedoraproject.org> 0.7.16-1
 - Update to 0.7.16
 
